@@ -24,8 +24,7 @@
 |---|---|
 | TI-89 Titanium | Developed and tested on a TI-89 Titanium (AMS 3.x). |
 | ESP32-S3 Super Mini | Onboard RGB LED on GPIO48. GPIO4 = Tip, GPIO5 = Ring. |
-| Thin wire (~30 AWG) | 4 wires: Tip, Ring, GND, 5V. |
-| 0–330 Ω resistors (optional) | In series on Tip/Ring. **Do not use 1 kΩ or more.** |
+| Thin wire (~30 AWG) | 4 wires: Tip, Ring, GND, 5V. Tip/Ring go **directly** to the ESP32, no resistors. |
 
 | TI-89 | ESP32-S3 Super Mini |
 |---|---|
@@ -123,7 +122,7 @@ Needs about 90 KB of free RAM. The settings change the TI's own MODE (angle unit
 ### Troubleshooting and lessons learned
 
 1. **Answer never shows although the ESP log says "sent OK".** `OSLinkReset()` also closes the link: call `OSLinkReset()` first, then `OSLinkOpen()`.
-2. **The TI doesn't see the ESP's acknowledge (purple LED).** The Titanium's link pull-ups are strong, so a 1 kΩ series resistor is too much; the ESP must ACK within microseconds (`FRAME_STABLE_US` = 20 µs); solder to the jack pins, not near L8/L9.
+2. **The TI doesn't see the ESP's acknowledge (purple LED).** The Titanium's link pull-ups are strong, so series resistors stop the ESP from pulling the line low (wire Tip/Ring directly); the ESP must ACK within microseconds (`FRAME_STABLE_US` = 20 µs); solder to the jack pins, not near L8/L9.
 3. **Garbage frames.** A link reset pulls both lines low for ~200 µs; the firmware ignores any "bit" with both lines low.
 4. **Calculator turns itself on.** Any glitch on the link lines wakes the TI-89. The RGB LED's current spikes on 4×AAA were enough: keep `LED_DEBUG 0`. The firmware also holds the link pins during its own restarts.
 5. **WiFi never connects.** ESP32 is 2.4 GHz only (iPhone hotspot: enable *Maximize Compatibility*). Use `/wifi`.
@@ -187,7 +186,7 @@ docs/                        wiring diagram, jack pinout, photos
 
 - **Tháo pin AAA trước khi cắm USB vào ESP.**
 - Hàn Tip/Ring vào **chân jack**, không hàn vào L8/L9. Nếu hàn ngược Tip/Ring thì đặt `SWAP_TIP_RING 1`.
-- Điện trở nối tiếp tối đa 330Ω, **không dùng 1kΩ**.
+- Tip/Ring nối **thẳng** vào ESP, **không dùng điện trở**.
 - Không để bo ESP hay dây đè lên mặt sau màn hình.
 
 ### Nạp firmware ESP32
@@ -220,7 +219,7 @@ Rút cáp USB của TI-89 khi dùng cổng link.
 ### Lỗi đã gặp
 
 1. Câu trả lời không hiện: phải gọi `OSLinkReset()` **trước** `OSLinkOpen()`.
-2. TI không thấy ESP trả lời (LED tím): bỏ điện trở 1kΩ, hàn đúng chân jack.
+2. TI không thấy ESP trả lời (LED tím): bỏ điện trở, nối thẳng, hàn đúng chân jack.
 3. Máy tự bật: tắt `LED_DEBUG`.
 4. WiFi không kết nối: ESP chỉ chạy 2.4 GHz, kiểm tra bằng `/wifi`.
 5. Tay cầm vào game không nhận: dùng Steam Input hoặc x360ce.
