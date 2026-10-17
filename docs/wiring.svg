@@ -2,7 +2,7 @@
   <rect width="960" height="700" fill="#ffffff"/>
 
   <text x="480" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">Sơ đồ hàn: TI-89 Titanium ↔ ESP32-S3 Super Mini</text>
-  <text x="480" y="62" text-anchor="middle" font-size="14" fill="#555">4 dây · Tip/Ring nối thẳng (hoặc 330Ω) · không diode · không công tắc</text>
+  <text x="480" y="62" text-anchor="middle" font-size="14" fill="#555">4 dây · Tip/Ring nối thẳng, không điện trở · không diode · không công tắc</text>
 
   <!-- TI-89 board -->
   <rect x="40" y="90" width="300" height="420" rx="14" fill="#f3f5f8" stroke="#8a94a3" stroke-width="2"/>
@@ -64,19 +64,13 @@
   </g>
 
   <!-- Wires -->
-  <!-- Tip -> R1 -> GPIO4 -->
-  <polyline points="325,193 420,193 420,233 470,233" fill="none" stroke="#d9534f" stroke-width="4"/>
-  <rect x="470" y="221" width="70" height="24" rx="4" fill="#e9d8b4" stroke="#7a5b1e" stroke-width="2"/>
-  <rect x="484" y="221" width="5" height="24" fill="#8b4513"/><rect x="496" y="221" width="5" height="24" fill="#000"/><rect x="508" y="221" width="5" height="24" fill="#d9534f"/><rect x="526" y="221" width="5" height="24" fill="#d4af37"/>
-  <text x="505" y="214" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">0–330Ω</text>
-  <line x1="540" y1="233" x2="628" y2="233" stroke="#d9534f" stroke-width="4"/>
+  <!-- Tip -> GPIO4 (noi thang) -->
+  <polyline points="325,193 420,193 420,233 628,233" fill="none" stroke="#d9534f" stroke-width="4"/>
+  <text x="525" y="224" text-anchor="middle" font-size="12" fill="#a33" font-weight="bold">nối thẳng</text>
 
-  <!-- Ring -> R2 -> GPIO5 -->
-  <polyline points="325,243 400,243 400,283 470,283" fill="none" stroke="#9aa3ad" stroke-width="4"/>
-  <rect x="470" y="271" width="70" height="24" rx="4" fill="#e9d8b4" stroke="#7a5b1e" stroke-width="2"/>
-  <rect x="484" y="271" width="5" height="24" fill="#8b4513"/><rect x="496" y="271" width="5" height="24" fill="#000"/><rect x="508" y="271" width="5" height="24" fill="#d9534f"/><rect x="526" y="271" width="5" height="24" fill="#d4af37"/>
-  <text x="505" y="312" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">0–330Ω</text>
-  <line x1="540" y1="283" x2="628" y2="283" stroke="#9aa3ad" stroke-width="4"/>
+  <!-- Ring -> GPIO5 (noi thang) -->
+  <polyline points="325,243 400,243 400,283 628,283" fill="none" stroke="#9aa3ad" stroke-width="4"/>
+  <text x="525" y="304" text-anchor="middle" font-size="12" fill="#555" font-weight="bold">nối thẳng</text>
 
   <!-- GND: battery − -> GND pad (Sleeve already common inside calc) -->
   <polyline points="325,470 560,470 560,337 628,337" fill="none" stroke="#222" stroke-width="4"/>
@@ -102,7 +96,7 @@
   <text x="60" y="556" font-size="14" font-weight="bold" fill="#1a1a1a">Lưu ý</text>
   <g font-size="13" fill="#333">
     <text x="60" y="580">• Rút pin AAA trước khi cắm USB-C vào ESP (không có diode). Lắp pin lại sau khi rút USB.</text>
-    <text x="60" y="602">• Tip/Ring nối thẳng hoặc qua ≤330Ω. KHÔNG dùng 1kΩ trở lên: link TI-89 Titanium kéo lên mạnh, ESP không kéo xuống đủ thấp.</text>
+    <text x="60" y="602">• Tip/Ring nối THẲNG, không dùng điện trở: link TI-89 Titanium kéo lên mạnh, có điện trở thì ESP không kéo xuống đủ thấp.</text>
     <text x="60" y="624">• Trước khi hàn: đo Tip/Ring so với Sleeve (máy bật, rảnh) để biết điện áp link; đo thông mạch, chắc chắn 5V không chập GND.</text>
     <text x="60" y="646">• Hàn Tip/Ring vào CHÂN JACK (không hàn vào L8/L9). Cố định dây bằng keo nến; dán Kapton dưới ESP; dây ~30 AWG.</text>
     <text x="60" y="668">• Firmware: Tip = pad 4, Ring = pad 5. Hàn ngược thì đặt SWAP_TIP_RING = 1, khỏi hàn lại.</text>
