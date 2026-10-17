@@ -1,0 +1,7 @@
+# build output
+*.o
+*.s
+*.9xz
+*.v2z
+# never commit real credentials
+secrets.h
